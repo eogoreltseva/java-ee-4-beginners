@@ -10,7 +10,13 @@ package com.acme.edu;
  * @author eugene
  */
 public class Main {
+    static int result;
+    
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println(result);
+    }
+
+    private static void add(int a, int b) {
+        result =  a + b;
     }
 }
