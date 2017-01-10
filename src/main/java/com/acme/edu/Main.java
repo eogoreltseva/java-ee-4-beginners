@@ -5,18 +5,25 @@
  */
 package com.acme.edu;
 
+import java.io.File;
+
 /**
  *
  * @author eugene
  */
 public class Main {
-    static int result;
-    
     public static void main(String[] args) {
-        System.out.println(result);
-    }
-
-    private static void add(int a, int b) {
-        result =  a + b;
+        byte b = 0; //0..255 | -127..128
+        short s = 0; //
+        int i = 0;
+        long l = 9999999999L;
+        
+        float f = 0.f;
+        double façade = 0.;
+        
+        char ch = 1234;
+        boolean bb = true | false;
+        
+        System.out.println(new Object());
     }
 }
