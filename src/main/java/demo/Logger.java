@@ -4,8 +4,13 @@ package demo;
  * Created by eugene on 11/01/2017.
  */
 public class Logger {
-    private Saver saver = SaverFactory.create(); //creator
-    private Filter filter = new LevelFilter();
+    private Saver saver; //DI (+DI Framework)
+    private Filter filter;
+
+    public Logger(Saver saver, Filter filter) {
+        this.saver = saver;
+        this.filter = filter;
+    }
 
     public void log(String message, int level) {
         if (filter.filter(level)) {
