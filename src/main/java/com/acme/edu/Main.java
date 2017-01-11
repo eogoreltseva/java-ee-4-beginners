@@ -10,20 +10,24 @@ package com.acme.edu;
  * @author eugene
  */
 
-public class Main {
-    public static void main(String[] args) { 
-        Emplyee j = new Emplyee();
-        m(j); //factual
-        System.out.println(j.age);
+enum Day {
+    Monday(1), T(2), W(3);
+    
+    private int age;
+    Day(int arg) {
+        this.age = arg;
     }
     
-    static void m(Emplyee arg) {
-        arg.age = 1;
+}
+
+public class Main {
+    public static void main(String[] args) { 
+       Day day = Day.M;
+       Day day2 = Day.T;
+       
+       Day.values()
+       
+        System.out.println(day == day2);
+        
     }
 }
-
-class Emplyee {
-     public int age = 0;    
-}
-
-
