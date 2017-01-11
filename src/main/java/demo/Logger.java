@@ -1,9 +1,11 @@
 package demo;
 
+import java.util.Optional;
+
 /**
  * Created by eugene on 11/01/2017.
  */
-public class Logger {
+public class Logger<T> {
     private Saver saver; //DI (+DI Framework)
     private Filter filter;
 
@@ -12,15 +14,18 @@ public class Logger {
         this.filter = filter;
     }
 
-    public void log(Object message, int level) {
+    public void log(T message, int level) {
         if (filter.filter(level)) {
             saver.save(message);
         }
     }
 
-    public Object[] get10LastObjects() {
+    public T[] get10LastObjects() {
         return null;
     }
+
+    public static <V> V m(V arg) { return null; }
+    public static int m(int a) { return 0; }
 }
 
 class Saver {
@@ -66,18 +71,18 @@ class BadSaver extends Saver {
 
 class Main {
     public static void main(String[] args) {
-        Logger logger = new Logger(new FileSaver(""), new LevelFilter());
+        Logger<String> logger = new Logger<String>(new FileSaver(""), new LevelFilter());
         logger.log("Ssssss", 9);
         logger.log("Ssssss", 9);
         logger.log(new Object(), 9);
         logger.log("Ssssss", 9);
         logger.log("Ssssss", 9);
 
-        for (Object elemant : logger.get10LastObjects()) {
-            if (elemant instanceof String) {
-                final String strElemnt = (String) elemant;
+        for (String elemant : logger.get10LastObjects()) {
+                final String strElemnt = elemant;
                 System.out.println(strElemnt);
-            }
         }
+
+        Logger.m(new Integer(5));
     }
 }
