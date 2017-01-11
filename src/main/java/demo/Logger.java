@@ -12,15 +12,19 @@ public class Logger {
         this.filter = filter;
     }
 
-    public void log(String message, int level) {
+    public void log(Object message, int level) {
         if (filter.filter(level)) {
             saver.save(message);
         }
     }
+
+    public Object[] get10LastObjects() {
+        return null;
+    }
 }
 
 class Saver {
-    public void save(String message) {
+    public void save(Object message) {
         ///////
     }
 }
@@ -34,7 +38,7 @@ class FileSaver extends Saver {  //IS-A
     }
 
     @Override
-    public void save(String message) {
+    public void save(Object message) {
         //.......
         super.save(message);
         //.....
@@ -54,7 +58,26 @@ class LevelFilter implements Filter {
 
 class BadSaver extends Saver {
     @Override
-    public void save(String message) {
+    public void save(Object message) {
         //Contract broken
+    }
+}
+
+
+class Main {
+    public static void main(String[] args) {
+        Logger logger = new Logger(new FileSaver(""), new LevelFilter());
+        logger.log("Ssssss", 9);
+        logger.log("Ssssss", 9);
+        logger.log(new Object(), 9);
+        logger.log("Ssssss", 9);
+        logger.log("Ssssss", 9);
+
+        for (Object elemant : logger.get10LastObjects()) {
+            if (elemant instanceof String) {
+                final String strElemnt = (String) elemant;
+                System.out.println(strElemnt);
+            }
+        }
     }
 }
