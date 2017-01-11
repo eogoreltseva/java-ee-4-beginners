@@ -4,7 +4,7 @@ package demo;
  * Created by eugene on 11/01/2017.
  */
 public class Logger {
-    private Saver saver = new FileSaver("tttt"); //creator
+    private Saver saver = SaverFactory.create(); //creator
     private Filter filter = new LevelFilter();
 
     public void log(String message, int level) {
