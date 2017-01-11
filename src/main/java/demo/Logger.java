@@ -4,8 +4,8 @@ package demo;
  * Created by eugene on 11/01/2017.
  */
 public class Logger {
-    private FileSaver saver = new FileSaver("tttt");
-    private LevelFilter filter = new LevelFilter();
+    private Saver saver = new FileSaver("tttt"); //creator
+    private Filter filter = new LevelFilter();
 
     public void log(String message, int level) {
         if (filter.filter(level)) {
@@ -14,7 +14,13 @@ public class Logger {
     }
 }
 
-class FileSaver {
+class Saver {
+    public void save(String message) {
+        ///////
+    }
+}
+
+class FileSaver extends Saver {  //IS-A
     private final String pathToFile;
 
 
@@ -22,13 +28,28 @@ class FileSaver {
         this.pathToFile = pathToFile;
     }
 
+    @Override
     public void save(String message) {
+        //.......
+        super.save(message);
         //.....
     }
 }
 
-class LevelFilter {
+interface Filter {
+    boolean filter(int level);
+}
+
+class LevelFilter implements Filter {
+    @Override
     public boolean filter(int level) {
         return false;
+    }
+}
+
+class BadSaver extends Saver {
+    @Override
+    public void save(String message) {
+        //Contract broken
     }
 }
