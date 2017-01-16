@@ -3,6 +3,8 @@ package com.acme.etl.core;
 import com.acme.etl.extractor.UserReader;
 import com.acme.etl.loader.UserWriter;
 
+import java.io.IOException;
+
 /**
  *
  * @author vm.andreev
@@ -22,10 +24,13 @@ public class Controller {
 		this.userWriters = userWriters;
 	}
 
-	public void doETL() {
+	public void doETL() throws IOException {
 		User[] users = userReader.readUsers();
-		for (UserWriter userWriter : userWriters) {
-			userWriter.save(users);
+		while (users != null && users.length > 0) {
+			for (UserWriter userWriter : userWriters) {
+				userWriter.save(users);
+			}
+			users = userReader.readUsers();
 		}
 
 	}
