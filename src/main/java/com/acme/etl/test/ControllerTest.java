@@ -25,5 +25,8 @@ public class ControllerTest {
 
         controller.doETL();
         csvUserReader.close();
+
     }
 }
+
+// TODO: Exceptions, Collections, Refactoring
