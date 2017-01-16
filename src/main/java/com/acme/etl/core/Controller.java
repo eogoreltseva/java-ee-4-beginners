@@ -26,7 +26,7 @@ public class Controller {
 
 	public void doETL() throws IOException {
 		User[] users = userReader.readUsers();
-		while (users.length > 0) {
+		while (users != null && users.length > 0) {
 			for (UserWriter userWriter : userWriters) {
 				userWriter.save(users);
 			}

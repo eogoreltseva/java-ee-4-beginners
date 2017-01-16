@@ -9,18 +9,26 @@ import java.io.IOException;
 public class BatchedBufferReader {
     private int batchSize;
     private BufferedReader bufferedReader;
+    private boolean next;
+    private String nextLine = null;
 
     public BatchedBufferReader(int batchSize, BufferedReader bufferedReader) {
         this.batchSize = batchSize;
         this.bufferedReader = bufferedReader;
+        this.next = true;
+
     }
 
-    public String[] read() throws IOException {
+    public String[] readBatch() throws IOException {
         String[] lines = new String[batchSize];
-        for (int counter = 0; counter < batchSize; counter++) {
+        lines[0] = nextLine;
+        for (int counter = 1; counter < batchSize; counter++) {
             String line = bufferedReader.readLine();
             if (line != null) {
                 lines[counter] = line;
+            } else {
+                this.next = false;
+                break;
             }
         }
         return lines;
@@ -28,5 +36,10 @@ public class BatchedBufferReader {
 
     public void close() throws IOException {
         this.bufferedReader.close();
+    }
+
+    public boolean hasNext() throws IOException {
+        this.nextLine = this.bufferedReader.readLine();
+        return (this.nextLine != null);
     }
 }

@@ -2,7 +2,7 @@ package com.acme.etl.test;
 
 import com.acme.etl.core.Controller;
 import com.acme.etl.extractor.BatchedBufferReader;
-import com.acme.etl.extractor.UserReaderCSV;
+import com.acme.etl.extractor.CSVUserReader;
 
 import java.io.*;
 
@@ -17,12 +17,13 @@ public class ControllerTest {
      * @param args input params
      */
     public static void main(String[] args) throws IOException {
+        CSVUserReader csvUserReader = new CSVUserReader(new BatchedBufferReader(3, new BufferedReader(new FileReader(new File(args[0])))));
         Controller controller = new Controller(
-                new UserReaderCSV(new BatchedBufferReader(3, new BufferedReader(new FileReader(new File(args[0]))))),
+                csvUserReader,
                 new UserWriterStub("LDAP"), new UserWriterStub("DB")
         );
 
         controller.doETL();
-
+        csvUserReader.close();
     }
 }
