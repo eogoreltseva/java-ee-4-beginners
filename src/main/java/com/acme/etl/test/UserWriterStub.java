@@ -2,12 +2,13 @@ package com.acme.etl.test;
 
 import com.acme.etl.loader.UserWriter;
 import com.acme.etl.core.User;
+import com.acme.etl.loader.UserWriterException;
 import java.util.Collection;
 
 /**
  * @author vm.andreev
  */
-class UserWriterStub implements UserWriter {
+class UserWriterStub implements UserWriter  {
 
     private final String instance;
 
@@ -21,7 +22,7 @@ class UserWriterStub implements UserWriter {
      * @param users
      */
     @Override
-    public void save(Collection<User> users) {
+    public void save(Collection<User> users) throws UserWriterException {
         for (User user : users) {
             if (user != null) {
                 System.out.println("Saved: " + user + " to " + instance);

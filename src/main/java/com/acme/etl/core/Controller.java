@@ -3,9 +3,12 @@ package com.acme.etl.core;
 import com.acme.etl.extractor.FileFormatException;
 import com.acme.etl.extractor.UserReader;
 import com.acme.etl.loader.UserWriter;
+import com.acme.etl.loader.UserWriterException;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +33,11 @@ public class Controller {
             Collection users = null;
 		while( (users = userReader.readUsers()) != null){
                     for (UserWriter userWriter : userWriters) {
+                        try {
                             userWriter.save(users);
+                        } catch (UserWriterException ex) {
+                            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
 		} 
 	}
