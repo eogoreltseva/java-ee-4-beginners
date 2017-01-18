@@ -1,9 +1,11 @@
 package com.acme.etl.core;
 
+import com.acme.etl.extractor.FileFormatException;
 import com.acme.etl.extractor.UserReader;
 import com.acme.etl.loader.UserWriter;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  *
@@ -24,14 +26,12 @@ public class Controller {
 		this.userWriters = userWriters;
 	}
 
-	public void doETL() throws IOException {
-		User[] users = userReader.readUsers();
-		while (users != null && users.length > 0) {
-			for (UserWriter userWriter : userWriters) {
-				userWriter.save(users);
-			}
-			users = userReader.readUsers();
-		}
-
+	public void doETL() throws IOException, FileFormatException {
+            Collection users = null;
+		while( (users = userReader.readUsers()) != null){
+                    for (UserWriter userWriter : userWriters) {
+                            userWriter.save(users);
+                    }
+		} 
 	}
 }

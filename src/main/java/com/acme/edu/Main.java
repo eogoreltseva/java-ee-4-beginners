@@ -25,5 +25,8 @@ public class Main {
         boolean bb = true | false;
         
         System.out.println(new Object());
+        
+        System.out.println("Hi, this is new line!");
+        System.out.println("Hello! I'm Nosov!");
     }
 }
