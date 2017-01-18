@@ -9,5 +9,5 @@ import java.util.Collection;
  */
 public interface UserWriter {
 
-	void save(Collection<User> users);
+	void save (Collection<User> users) throws UserWriterException;
 }
