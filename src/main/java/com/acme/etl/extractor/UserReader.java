@@ -3,6 +3,7 @@ package com.acme.etl.extractor;
 import com.acme.etl.core.User;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  *
@@ -10,5 +11,5 @@ import java.io.IOException;
  */
 public interface UserReader {
 
-	User[] readUsers() throws IOException;
+	Collection readUsers() throws IOException, FileFormatException;
 }

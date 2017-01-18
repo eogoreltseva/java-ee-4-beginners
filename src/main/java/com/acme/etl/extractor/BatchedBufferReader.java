@@ -11,6 +11,10 @@ public class BatchedBufferReader {
     private BufferedReader bufferedReader;
     private boolean next;
     private String nextLine = null;
+    
+    public int getBatchSize(){
+        return this.batchSize;
+    }
 
     public BatchedBufferReader(int batchSize, BufferedReader bufferedReader) {
         this.batchSize = batchSize;
