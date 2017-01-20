@@ -1,10 +1,12 @@
 package com.acme.etl.core;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vm.andreev
  */
-public class User {
+public class User implements Serializable{
 
 	private final int id;
 

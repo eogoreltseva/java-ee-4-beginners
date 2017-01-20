@@ -35,7 +35,10 @@ DriverManager.getConnection("jdbc:derby://localhost:1527/sample;", "app", "app")
                 s.setInt(1, user.getId());
                 s.setString(2, user.getName());
                 s.executeUpdate();
+                
+                System.out.println("User " + user.getName() + " has been saved to DB");
             }
+            
     }   catch (SQLException ex) {
             Logger.getLogger(DBUserWriter.class.getName()).log(Level.SEVERE, null, ex);
             throw new UserWriterException("Cannot write to DB", ex);
