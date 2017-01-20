@@ -16,7 +16,7 @@ public class CSVUserReader implements UserReader, AutoCloseable {
     public CSVUserReader(BatchedBufferReader batchedBufferReader) {
         this.batchedBufferReader = batchedBufferReader;
     }
-
+ 
     @Override
     public Collection readUsers() throws IOException, FileFormatException {
         if (batchedBufferReader.hasNext()) {

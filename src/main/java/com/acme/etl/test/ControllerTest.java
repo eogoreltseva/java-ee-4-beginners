@@ -5,6 +5,7 @@ import com.acme.etl.extractor.BatchedBufferReader;
 import com.acme.etl.extractor.CSVUserReader;
 import com.acme.etl.extractor.FileFormatException;
 import com.acme.etl.loader.DBUserWriter;
+import com.acme.etl.loader.LDAPUserWriter;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ public class ControllerTest {
                 Controller controller;
                 controller = new Controller(
                         csvUserReader,
-                        new UserWriterStub("LDAP"), new DBUserWriter()                       
+                        new LDAPUserWriter(), new DBUserWriter()                       
                 );
                 
                 controller.doETL();
