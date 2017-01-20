@@ -53,7 +53,7 @@ public class LDAPUserWriter implements UserWriter {
 
             
             try{
-                initialDirContext.lookup("ou=users,ou=admins");
+                initialDirContext.lookup("ou=admins,ou=users");
             } catch (NameNotFoundException ex){
                 Attributes attrs = new BasicAttributes(true);
                 Attribute objclass = new BasicAttribute("objectclass");
