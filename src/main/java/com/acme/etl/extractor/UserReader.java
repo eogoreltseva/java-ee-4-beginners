@@ -4,6 +4,7 @@ import com.acme.etl.core.User;
 
 import java.io.IOException;
 import java.util.Collection;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -11,5 +12,5 @@ import java.util.Collection;
  */
 public interface UserReader {
 
-	Collection readUsers() throws IOException, FileFormatException;
+	Collection readUsers() throws IOException, FileFormatException, JAXBException;
 }
