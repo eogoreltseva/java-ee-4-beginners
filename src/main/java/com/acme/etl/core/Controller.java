@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -29,16 +30,14 @@ public class Controller {
 		this.userWriters = userWriters;
 	}
 
-	public void doETL() throws IOException, FileFormatException {
-            Collection users = null;
-		while( (users = userReader.readUsers()) != null){
-                    for (UserWriter userWriter : userWriters) {
+	public void doETL() throws IOException, FileFormatException, JAXBException {
+            Collection users = userReader.readUsers();
+            for (UserWriter userWriter : userWriters) {
                         try {
                             userWriter.save(users);
                         } catch (UserWriterException ex) {
                             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
-		} 
+            }
 	}
 }
